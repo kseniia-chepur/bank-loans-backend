@@ -16,6 +16,7 @@ const clientSchema = new Schema({
   phone: {
     type: Number,
     required: true,
+    unique: true,
   },
   contactPerson: {
     type: String,
