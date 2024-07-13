@@ -1,7 +1,7 @@
 const ownershipTypes = {
   LIMITED_LIABILITY_COMPANY: 'LLC',
-  PRIVATE_ENTERPRISE: 'Private',
-  JOINT_STOCK_COMPANY: 'Joint stock',
+  PRIVATE_ENTERPRISE: 'private',
+  JOINT_STOCK_COMPANY: 'joint stock',
 };
 
 module.exports = ownershipTypes;

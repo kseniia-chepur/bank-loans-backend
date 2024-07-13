@@ -1,14 +1,14 @@
 const { model, Schema } = require('mongoose');
 const { loanTypes } = require('../constants');
 
-const loanTypesSchema = new Schema(
+const loanTypeSchema = new Schema(
   {
     name: {
       type: String,
       enum: Object.values(loanTypes),
       required: true,
     },
-    loanConditions: {
+    conditions: {
       type: String, 
       required: true,
     },
@@ -16,7 +16,7 @@ const loanTypesSchema = new Schema(
       type: Number,
       required: true,
     }, 
-    loanTerm: { // Term in months
+    term: { // Term in months
       type: Number,
       required: true,
     }
@@ -27,6 +27,6 @@ const loanTypesSchema = new Schema(
   },
 );
 
-const LoanTypes = model('LoanTypes', loanTypesSchema);
+const LoanTypes = model('LoanTypes', loanTypeSchema);
 
 module.exports = LoanTypes;

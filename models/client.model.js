@@ -8,7 +8,7 @@ const clientSchema = new Schema(
       required: true,
       unique: true,
     },
-    ownershipType: {
+    ownership: {
       type: String,
       enum: Object.values(ownershipTypes), 
       required: true,
@@ -32,6 +32,11 @@ const clientSchema = new Schema(
     versionKey: false,
   },
 );
+
+clientSchema.pre('save', function(next) {
+  console.log(this);
+  next();
+})
 
 const Client = model('Client', clientSchema);
 
