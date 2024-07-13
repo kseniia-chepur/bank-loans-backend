@@ -1,6 +1,7 @@
 const { Types } = require("mongoose");
 
 const { Client } = require("../models");
+const { HttpError } = require("../utils");
 
 exports.createClient = (clientData) => Client.create(clientData);
 
@@ -24,7 +25,7 @@ exports.checkClientExistsByPhone = async (phone) => {
   const clientExists = await Client.exists(phone);
 
   if (clientExists) {
-    throw new Error(409, 'Client exists');
+    throw new HttpError(409, 'Client exists');
   }
 };
 
@@ -32,12 +33,12 @@ exports.checkClientExistsById = async (id) => {
   const isIdValid = Types.ObjectId.isValid(id);
 
   if (!isIdValid) {
-    throw new Error(404, 'Client not found');
+    throw new HttpError(404, 'Client not found');
   }
 
   const clientExists = await Client.exists({ _id: id });
 
   if (!clientExists) {
-    throw new Error(404, 'Client not found');
+    throw new HttpError(404, 'Client not found');
   }
 };
