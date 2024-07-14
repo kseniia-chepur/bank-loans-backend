@@ -1,14 +1,14 @@
-const { model, Schema } = require('mongoose');
+const { model, Schema, Types } = require('mongoose');
 
 const loanSchema = new Schema(
   {
     loanType: {
-      type: Schema.Types.ObjectId, 
+      type: Types.ObjectId, 
       ref: 'LoanType', 
       required: true,
     },
     client: {
-      type: Schema.Types.ObjectId, 
+      type: Types.ObjectId, 
       ref: 'Client',
       required: true,
     },

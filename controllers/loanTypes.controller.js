@@ -1,7 +1,8 @@
 const { Loan } = require("../models");
 const { loanTypeService } = require("../services");
+const { HttpError } = require("../utils");
 
-exports.createLoanType = async (req, res) => {
+exports.createLoanType = async (req, res, next) => {
   try {
     const newLoanType = await loanTypeService.createLoanType(req.body);
     
@@ -10,11 +11,11 @@ exports.createLoanType = async (req, res) => {
       ['loan type']: newLoanType,
     });
   } catch(err) {
-    res.status(500).json(({ message: 'Failed to create loan type' }));
+    next(err);
   }
 };
 
-exports.getLoanTypes = async (req, res) => {
+exports.getLoanTypes = async (req, res, next) => {
   try {
     const loanTypes = await loanTypeService.getAllLoanTypes();
 
@@ -23,11 +24,11 @@ exports.getLoanTypes = async (req, res) => {
       ['loan types']: loanTypes,
     });
   } catch(err) {
-    res.status(500).json(({ message: 'Failed to fetch loan type' }));
+    next(err);
   }
 };
 
-exports.getOneLoanType = async (req, res) => {
+exports.getOneLoanType = async (req, res, next) => {
   const { id } = req.params;
 
   try {
@@ -38,7 +39,7 @@ exports.getOneLoanType = async (req, res) => {
       ['loan type']: loanType,
     });
   } catch(err) {
-    res.status(500).json(({ message: 'Failed to fetch loan type' }));
+    next(err);
   }
 };
 
@@ -53,11 +54,11 @@ exports.updateLoanType = async (req, res, next) => {
       ['loan type']: updatedLoanType,
     });
   } catch(err) {
-    res.status(500).json(({ message: 'Failed to update loan type' }));
+    next(err);
   }
 };
 
-exports.deleteLoanType = async (req, res) => {
+exports.deleteLoanType = async (req, res, next) => {
   const { id } = req.params;
 
   try {
@@ -71,6 +72,6 @@ exports.deleteLoanType = async (req, res) => {
 
     res.sendStatus(204);
   } catch(err) {
-    res.status(500).json(({ message: 'Failed to delete loan type' }));
+    next(err);
   }
 };

@@ -1,12 +1,13 @@
 const { loanTypeValidation, HttpError } = require("../utils");
 const { loanTypeService } = require('../services');
+const { httpErrorMsg } = require("../constants");
 
 exports.handleCreateLoanType = async (req, res, next) => {
   try {
     const { value, error } = loanTypeValidation.createLoanTypeValidator(req.body);
 
     if (error) {
-      throw new HttpError(400, 'Invalid loan type data');
+      throw new HttpError(400, httpErrorMsg.INVALID_DATA);
     }
 
     req.body = value;
@@ -33,7 +34,7 @@ exports.handleUpdateLoanType = async (req, res, next) => {
     const { value, error } = loanTypeValidation.updateLoanTypeValidator(req.body);
 
     if (error) {
-      throw new HttpError(400, 'Invalid loan type data');
+      throw new HttpError(400, httpErrorMsg.INVALID_DATA);
     }
 
     req.body = value;

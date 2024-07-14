@@ -3,7 +3,7 @@ const cors = require('cors');
 const dotenv = require('dotenv').config();
 const mongoose = require('mongoose');
 
-const { loanRouter, clientRouter, loanTypesRouter } = require('./routes');
+const { loanRouter, clientRouter, loanTypesRouter, authRouter } = require('./routes');
 const { errorController } = require('./controllers');
 
 process.env.MODE === 'production' 
@@ -28,6 +28,7 @@ const pathPrefix = 'api/v1';
 app.use(`/${pathPrefix}/clients`, clientRouter);
 app.use(`/${pathPrefix}/loantypes`, loanTypesRouter);
 app.use(`/${pathPrefix}/loans`, loanRouter);
+app.use(`/${pathPrefix}/auth`, authRouter);
 
 app.all('*', (req, res) => {
     res.status(404).json({

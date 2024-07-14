@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-const { loanTypes } = require('../constants');
+const { loanTypes } = require('../../constants');
 
 exports.createLoanDataValidator = (data) =>
   Joi.object()

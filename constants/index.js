@@ -1,9 +1,14 @@
 const loanTypes = require('./loanTypes');
 const ownershipTypes = require('./ownershipTypes');
-const phoneRegex = require('./regex');
+const regex = require('./regex');
+const userRoles = require('./userRoles');
+const httpErrorMsg = require('./httpErrorMsg');
+
 
 module.exports = {
   loanTypes,
   ownershipTypes,
-  phoneRegex,
+  regex,
+  userRoles,
+  httpErrorMsg,
 };

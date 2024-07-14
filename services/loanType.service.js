@@ -2,6 +2,7 @@ const { Types } = require("mongoose");
 
 const { LoanType } = require("../models");
 const { HttpError } = require("../utils");
+const { httpErrorMsg } = require("../constants");
 
 exports.createLoanType = (loanTypeData) => LoanType.create(loanTypeData);
 
@@ -26,12 +27,12 @@ exports.checkLoanTypeExistsById = async (id) => {
   const isIdValid = Types.ObjectId.isValid(id);
 
   if (!isIdValid) {
-      throw new HttpError( 404,  'Data not found');
+      throw new HttpError( 404, httpErrorMsg.DATA_NOT_FOUND);
   }
 
   const loanTypeExists = await LoanType.exists({ _id: id });
 
   if (!loanTypeExists) {
-    throw new HttpError(404, 'Data not found');
+    throw new HttpError(404,  httpErrorMsg.DATA_NOT_FOUND);
   }
 };

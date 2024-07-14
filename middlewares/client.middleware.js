@@ -1,12 +1,13 @@
 const { clientValidation, HttpError } = require("../utils");
 const { clientService } = require('../services');
+const { httpErrorMsg } = require("../constants");
 
 exports.handleCreateClientData = async (req, res, next) => {
   try {
     const { value, error } = clientValidation.createClientDataValidator(req.body);
 
     if (error) {
-      throw new HttpError(400, 'Invalid client data');
+      throw new HttpError(400, httpErrorMsg.INVALID_DATA);
     }
 
    await clientService.checkClientExistsByPhone({ phone: value.phone });
@@ -35,7 +36,7 @@ exports.handleUpdateClientData = async (req, res, next) => {
     const { value, error } = clientValidation.updateClientDataValidator(req.body);
 
     if (error) {
-      throw new HttpError(400, 'Invalid client data');
+      throw new HttpError(400, httpErrorMsg.INVALID_DATA);
     }
 
     const { phone } = value?.phone;
