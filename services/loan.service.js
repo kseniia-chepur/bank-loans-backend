@@ -58,9 +58,11 @@ exports.updateLoan = async (id, repaymentDate) => {
 exports.deleteLoan = async (id) => {
   const loan = await Loan.findById(id);
 
-  if (loan.fine !== 0 || !loan.dateRepaid) {
+  if (loan.fineAmount !== 0 || !loan.dateRepaid) {
     throw new HttpError(400, httpErrorMsg.CANNOT_DELETE_LOAN);
   }
+
+  await Loan.findByIdAndDelete(id);
 };
 
 exports.checkLoanExistsById = async (id) => {
