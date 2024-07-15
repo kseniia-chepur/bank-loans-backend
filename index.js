@@ -25,10 +25,11 @@ app.use(cors());
 
 const pathPrefix = 'api/v1';
 
+app.use(`/${pathPrefix}/auth`, authRouter);
 app.use(`/${pathPrefix}/clients`, clientRouter);
 app.use(`/${pathPrefix}/loantypes`, loanTypesRouter);
 app.use(`/${pathPrefix}/loans`, loanRouter);
-app.use(`/${pathPrefix}/auth`, authRouter);
+
 
 app.all('*', (req, res) => {
     res.status(404).json({

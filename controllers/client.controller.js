@@ -9,7 +9,6 @@ exports.createClient = async (req, res, next) => {
       client: newClient,
     });
   } catch(err) {
-    console.log(err)
     next(err);
   }
 };

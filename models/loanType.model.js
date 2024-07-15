@@ -27,6 +27,6 @@ const loanTypeSchema = new Schema(
   },
 );
 
-const LoanTypes = model('LoanTypes', loanTypeSchema);
+const LoanType = model('LoanType', loanTypeSchema);
 
-module.exports = LoanTypes;
+module.exports = LoanType;

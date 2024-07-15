@@ -10,7 +10,6 @@ exports.signup = async (req, res, next) => {
       token,
     });
   } catch(err) {
-    console.log(err)
     next(err);
   }
 };
@@ -25,7 +24,15 @@ exports.login = async (req, res, next) => {
       token,
     });
   } catch(err) {
-    console.log(err)
     next(err);
-  }  
-}
+  }
+};
+
+exports.showPersonalCabinet = (req, res) => {
+  req.user.password = undefined;
+
+    res.status(200).json({
+    status: 'Request succeeded',
+    user: req.user,
+  });
+};

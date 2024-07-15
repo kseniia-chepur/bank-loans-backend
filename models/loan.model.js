@@ -3,8 +3,8 @@ const { model, Schema, Types } = require('mongoose');
 const loanSchema = new Schema(
   {
     loanType: {
-      type: Types.ObjectId, 
-      ref: 'LoanType', 
+      type: Types.ObjectId,
+      ref: 'LoanType',
       required: true,
     },
     client: {
@@ -20,12 +20,15 @@ const loanSchema = new Schema(
       type: Date,
       default: Date.now(),
     },
-    dateRepaid: {
+    dueDate: {
       type: Date,
     },
-    installments: {
+    parts: {
       type: Number,
       default: 1,
+    },
+    dateRepaid: {
+      type: Date,
     },
     fineAmount: {
       type: Number,

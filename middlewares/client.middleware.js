@@ -39,8 +39,8 @@ exports.handleUpdateClientData = async (req, res, next) => {
       throw new HttpError(400, httpErrorMsg.INVALID_DATA);
     }
 
-    const { phone } = value?.phone;
-    const {id } = req.params;
+    const { phone } = value;
+    const {id } = req.params;  
 
     if (phone) {
       await clientService.checkClientExistsByPhone({ phone, _id: { $ne: id }});

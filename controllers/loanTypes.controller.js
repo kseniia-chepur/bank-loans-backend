@@ -1,6 +1,4 @@
-const { Loan } = require("../models");
 const { loanTypeService } = require("../services");
-const { HttpError } = require("../utils");
 
 exports.createLoanType = async (req, res, next) => {
   try {
@@ -62,14 +60,8 @@ exports.deleteLoanType = async (req, res, next) => {
   const { id } = req.params;
 
   try {
-    const existingLoans = await Loan.findOne({ loanType: id });
-
-    if (existingLoans) {
-      return res.status(400).json({ message: 'Cannot delete loan type with existing loans' });
-  }
-
-   await loanTypeService.deleteLoanType(id);
-
+    await loanTypeService.deleteLoanType(id);
+  
     res.sendStatus(204);
   } catch(err) {
     next(err);

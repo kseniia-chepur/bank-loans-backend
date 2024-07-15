@@ -1,6 +1,6 @@
 const { Types } = require("mongoose");
 
-const { Client } = require("../models");
+const { Client, Loan } = require("../models");
 const { HttpError } = require("../utils");
 const { httpErrorMsg } = require("../constants");
 
@@ -20,7 +20,15 @@ exports.updateClient = async (id, updatedClientData) => {
   return client.save();
 };
 
-exports.deleteUser = (id) => Client.findByIdAndDelete(id);
+exports.deleteUser = async (id) => {
+  const existingLoans = await Loan.findOne({ client: id });
+
+  if (existingLoans) {
+    throw new HttpError(400, httpErrorMsg.CANNOT_DELETE_CLIENT);
+  }
+
+  await Client.findByIdAndDelete(id);
+}
 
 exports.checkClientExistsByPhone = async (phone) => {
   const clientExists = await Client.exists(phone);

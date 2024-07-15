@@ -3,6 +3,8 @@ const loanTypeValidation = require('./validation/loanType.validation');
 const loanValidation = require('./validation/loan.validation');
 const authValidation = require('./validation/auth.validation');
 const HttpError = require('./httpError');
+const calculateDueDate = require('./calculateDueDate');
+const calculateFine= require('./calculateFine');
 
 module.exports = {
   clientValidation,
@@ -10,5 +12,7 @@ module.exports = {
   loanValidation,
   authValidation,
   HttpError,
+  calculateDueDate,
+  calculateFine,
 };
 
