@@ -1,3 +1,4 @@
+const { successMsg } = require("../constants");
 const { loanService } = require("../services");
 
 exports.createLoan = async (req, res, next) => {
@@ -5,7 +6,7 @@ exports.createLoan = async (req, res, next) => {
     const newLoan = await loanService.createLoan(req.body);
     
     res.status(201).json({
-      status: 'Request succeeded',
+      status: successMsg,
       loan: newLoan,
     });
   } catch(err) {
@@ -18,7 +19,7 @@ exports.getLoans = async (req, res, next) => {
     const loans = await loanService.getLoans();
 
     res.status(200).json({
-      status: 'Request succeeded',
+      status: successMsg,
       loans,
     });
   } catch(err) {
@@ -33,7 +34,7 @@ exports.getOneLoan = async (req, res) => {
     const loan = await loanService.getOneLoan(id);
 
     res.status(200).json({
-      status: 'Request succeeded',
+      status: successMsg,
       loan,
     });
   } catch(err) {
@@ -49,7 +50,7 @@ exports.updateLoan = async (req, res, next) => {
     const updatedLoan = await loanService.updateLoan(id, dateRepaid);
 
     res.status(200).json({
-      status: 'Request succeeded',
+      status: successMsg,
       loan: updatedLoan,
     });
   } catch(err) {

@@ -1,3 +1,4 @@
+const { successMsg } = require("../constants");
 const { clientService } = require("../services");
 
 exports.createClient = async (req, res, next) => {
@@ -5,7 +6,7 @@ exports.createClient = async (req, res, next) => {
     const newClient = await clientService.createClient(req.body);
     
     res.status(201).json({
-      status: 'Request succeeded',
+      status: successMsg,
       client: newClient,
     });
   } catch(err) {
@@ -18,7 +19,7 @@ exports.getClients = async (req, res, next) => {
     const clients = await clientService.getAllClients();
 
     res.status(200).json({
-      status: 'Request succeeded',
+      status: successMsg,
       clients,
     });
   } catch(err) {
@@ -33,7 +34,7 @@ exports.getOneClient = async (req, res, next) => {
     const client = await clientService.getOneClient(id);
 
     res.status(200).json({
-      status: 'Request succeeded',
+      status: successMsg,
       client,
     });
   } catch(err) {
@@ -48,7 +49,7 @@ exports.updateClient = async (req, res, next) => {
     const updatedClient = await clientService.updateClient(id, req.body);
 
     res.status(200).json({
-      status: 'Request succeeded',
+      status: successMsg,
       client: updatedClient,
     });
   } catch(err) {

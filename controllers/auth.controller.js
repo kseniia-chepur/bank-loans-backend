@@ -1,3 +1,4 @@
+const { successMsg } = require("../constants");
 const { userService } = require("../services")
 
 exports.signup = async (req, res, next) => {
@@ -5,7 +6,7 @@ exports.signup = async (req, res, next) => {
     const { user, token } = await userService.registerNewUser(req.body);
 
     res.status(201).json({
-      status: 'Request succeeded',
+      status: successMsg,
       user,
       token,
     });
@@ -19,7 +20,7 @@ exports.login = async (req, res, next) => {
     const { user, token } = await userService.loginUser(req.body);
 
     res.status(200).json({
-      status: 'Request succeeded',
+      status: successMsg,
       user,
       token,
     });
@@ -32,7 +33,7 @@ exports.showPersonalCabinet = (req, res) => {
   req.user.password = undefined;
 
     res.status(200).json({
-    status: 'Request succeeded',
+    status: successMsg,
     user: req.user,
   });
 };

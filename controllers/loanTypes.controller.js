@@ -1,3 +1,4 @@
+const { successMsg } = require("../constants");
 const { loanTypeService } = require("../services");
 
 exports.createLoanType = async (req, res, next) => {
@@ -5,7 +6,7 @@ exports.createLoanType = async (req, res, next) => {
     const newLoanType = await loanTypeService.createLoanType(req.body);
     
     res.status(201).json({
-      status: 'Request succeeded',
+      status: successMsg,
       ['loan type']: newLoanType,
     });
   } catch(err) {
@@ -18,7 +19,7 @@ exports.getLoanTypes = async (req, res, next) => {
     const loanTypes = await loanTypeService.getAllLoanTypes();
 
     res.status(200).json({
-      status: 'Request succeeded',
+      status: successMsg,
       ['loan types']: loanTypes,
     });
   } catch(err) {
@@ -33,7 +34,7 @@ exports.getOneLoanType = async (req, res, next) => {
     const loanType = await loanTypeService.getOneLoanType(id);
 
     res.status(200).json({
-      status: 'Request succeeded',
+      status: successMsg,
       ['loan type']: loanType,
     });
   } catch(err) {
@@ -48,7 +49,7 @@ exports.updateLoanType = async (req, res, next) => {
     const updatedLoanType = await loanTypeService.updateLoanType(id, req.body);
 
     res.status(200).json({
-      status: 'Request succeeded',
+      status: successMsg,
       ['loan type']: updatedLoanType,
     });
   } catch(err) {
