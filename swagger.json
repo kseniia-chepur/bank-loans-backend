@@ -398,7 +398,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GetLoanTypeResponse"
+                  "$ref": "#/components/schemas/GetLoanTypesResponse"
                 }
               }
             }
@@ -427,18 +427,7 @@
             "required": true
           }
         ],
-        "security": [{ "Bearer": [] }],
-        "requestBody": {
-          "description": "Get one loan type info",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/GetOneLoanTypeRequest"
-              }
-            }
-          }
-        },
+        "security": [{ "Bearer": [] }], 
         "responses": {
           "200": {
             "description": "Request succeeded",
@@ -637,18 +626,7 @@
             "required": true
           }
         ],
-        "security": [{ "Bearer": [] }],
-        "requestBody": {
-          "description": "Get one loan info",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/GetOneLoanRequest"
-              }
-            }
-          }
-        },
+        "security": [{ "Bearer": [] }],      
         "responses": {
           "200": {
             "description": "Request succeeded",
@@ -707,7 +685,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/UpdateLoanTypeResponse"
+                  "$ref": "#/components/schemas/UpdateLoanResponse"
                 }
               }
             }
@@ -763,7 +741,8 @@
           }
         }
       }
-    },
+    }
+  },
   "components": {
     "schemas": {
       "SignupRequest": {
@@ -793,7 +772,8 @@
         "properties": {
           "status": {
             "type": "string",
-            "description": "response status message"
+            "description": "response status message",
+            "example": "Request succeeded"
           },
           "user": {
             "type": "object",
@@ -856,7 +836,8 @@
         "properties": {
           "status": {
             "type": "string",
-            "description": "response status message"
+            "description": "response status message",
+            "example": "Request succeeded"
           },
           "user": {
             "type": "object",
@@ -900,33 +881,43 @@
       "CabinetResponse": {
         "type": "object",
         "properties": {
-          "_id": {
+          "status": {
             "type": "string",
-            "description": "User _id",
-            "example": "66939337055c87c83a923aea"
+            "description": "response status message",
+            "example": "Request succeeded"
           },
-          "email": {
-            "type": "string",
-            "format": "email",
-            "description": "User email address",
-            "example": "user@gmail.com"
-          },
-          "role": {
-            "type": "string",
-            "enum" : [ "specialist", "admin" ],
-            "example": "specialist" 
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date",
-            "description": "time of creation",
-            "example": "2024-07-14T08:58:32.012Z"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date",
-            "description": "the last update time",
-            "example": "2024-07-14T08:58:32.012Z"
+          "user": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string",
+                "description": "User _id",
+                "example": "66939337055c87c83a923aea"
+              },
+              "email": {
+                "type": "string",
+                "format": "email",
+                "description": "User email address",
+                "example": "user@gmail.com"
+              },
+              "role": {
+                "type": "string",
+                "enum" : [ "specialist", "admin" ],
+                "example": "specialist" 
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date",
+                "description": "time of creation",
+                "example": "2024-07-14T08:58:32.012Z"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date",
+                "description": "the last update time",
+                "example": "2024-07-14T08:58:32.012Z"
+              }
+            }
           }
         }
       },
@@ -952,7 +943,7 @@
           },
           "phone": {
             "type": "string",
-            "description": "Client's phone number, only Ukrainian mobile operators accepted",
+            "description": "Client's phone number, only Ukrainian mobile operators in format +380XXXXXXXXX accepted",
             "example": "+380971234567"
           },
           "contactPerson": {
@@ -967,7 +958,8 @@
         "properties": {
           "status": {
             "type": "string",
-            "description": "response status message"
+            "description": "response status message",
+            "example": "Request succeeded"
           },
           "client": {
             "type": "object",
@@ -1024,7 +1016,8 @@
         "properties": {
           "status": {
             "type": "string",
-            "description": "response status message"
+            "description": "response status message",
+            "example": "Request succeeded"
           },
           "clients": {
             "type": "array",
@@ -1084,7 +1077,8 @@
         "properties": {
           "status": {
             "type": "string",
-             "description": "response status message"
+            "description": "response status message",
+            "example": "Request succeeded"
           },
           "client": {
             "type": "object",
@@ -1161,7 +1155,8 @@
         "properties": {
           "status": {
             "type": "string",
-             "description": "response status message"
+            "description": "response status message",
+            "example": "Request succeeded"
           },
           "client": {
             "type": "object",
@@ -1245,7 +1240,8 @@
         "properties": {
           "status": {
             "type": "string",
-            "description": "response status message"
+            "description": "response status message",
+            "example": "Request succeeded"
           },
           "loan type": {
             "type": "object",
@@ -1297,7 +1293,8 @@
         "properties": {
           "status": {
             "type": "string",
-            "description": "response status message"
+            "description": "response status message",
+            "example": "Request succeeded"
           },
           "loan types": {
             "type": "array",
@@ -1352,7 +1349,8 @@
         "properties": {
           "status": {
             "type": "string",
-             "description": "response status message"
+            "description": "response status message",
+            "example": "Request succeeded"
           },
           "loan type": {
             "type": "object",
@@ -1424,7 +1422,8 @@
         "properties": {
           "status": {
             "type": "string",
-            "description": "response status message"
+            "description": "response status message",
+            "example": "Request succeeded"
           },
           "loan type": {
             "type": "object",
@@ -1487,13 +1486,13 @@
           },
           "amount": {
             "type": "string",
-            "description": "loan amount, min - 100000, max - 10000000",
+            "description": "loan amount, min - 100 000, max - 10 000 000",
             "example": "200000"
           },
           "dateIssued": {
             "type": "string",
              "format": "date",
-            "description": "loan issue date",
+            "description": "loan issue date, current date by default",
             "example": "2024-07-17T12:29:49.457Z"
           },
           "parts": {
@@ -1508,7 +1507,8 @@
         "properties": {
           "status": {
             "type": "string",
-            "description": "response status message"
+            "description": "response status message",
+            "example": "Request succeeded"
           },
           "loan": {
             "type": "object",
@@ -1519,24 +1519,65 @@
                 "example": "669577190528ef0f7c59b813"
               }, 
               "loanType": {
-                "type": "string",
-                "description": "id of selected loan type",
-                "example": "669191099a815f9ff35a46b9"
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "description": "LoanType_id",
+                    "example": "669191099a815f9ff35a46b9"
+                  }, 
+                  "name": {
+                    "type": "string",
+                    "enum" : [ "Term loan", "Equipment Loan", "Commercial Real Estate Loan", "Startup Loan"],
+                    "description": "type of loan",
+                    "example": "Startup Loan"
+                  },
+                  "rate": {
+                    "type": "number",
+                    "description": "loan rate in %, min - 3%, max - 40%",
+                    "example": "5"
+                  },
+                  "term": {
+                    "type": "number",
+                    "description": "loan term in months, min - 6 months, max - 60 months",
+                    "example": "12"
+                  }
+                }
               },
               "client": {
-                "type": "string",
-                "description": "id of the selected client",
-                "example": "66914abd776d15fcaa090fae"
+                "type": "object",
+                 "properties": {
+                  "_id": {
+                    "type": "string",
+                    "description": "Client_id",
+                    "example": "6697b93d58a0f618d7ee0426"
+                    }, 
+                    "name": {
+                      "type": "string",
+                      "description": "Client's name",
+                      "example": "agency abc"
+                    },
+                    "phone": {
+                      "type": "string",
+                      "description": "Client's phone number UA operator",
+                      "example": "+380971234567"
+                    },
+                    "contactPerson": {
+                      "type": "string",
+                      "description": "Contact person of the client",
+                      "example": "Alex"
+                    }
+                 }
               },
               "amount": {
                 "type": "string",
-                "description": "loan amount, min - 100000, max - 10000000",
+                "description": "loan amount, min - 100 000, max - 10 000 000",
                 "example": "200000"
               },
               "dateIssued": {
                 "type": "string",
                  "format": "date",
-                "description": "loan issue date",
+                 "description": "loan issue date, current date by default",
                 "example": "2024-07-17T12:29:49.457Z"
               },
               "dueDate": {
@@ -1576,7 +1617,8 @@
         "properties": {
           "status": {
             "type": "string",
-            "description": "response status message"
+            "description": "response status message",
+            "example": "Request succeeded"
           },
           "loans": {
             "type": "array",
@@ -1589,29 +1631,70 @@
                   "example": "669577190528ef0f7c59b813"
                 }, 
                 "loanType": {
-                  "type": "string",
-                  "description": "id of the selected loan type",
-                  "example": "669191099a815f9ff35a46b9"
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "description": "LoanType_id",
+                      "example": "669191099a815f9ff35a46b9"
+                    }, 
+                    "name": {
+                      "type": "string",
+                      "enum" : [ "Term loan", "Equipment Loan", "Commercial Real Estate Loan", "Startup Loan"],
+                      "description": "type of loan",
+                      "example": "Startup Loan"
+                    },
+                    "rate": {
+                      "type": "number",
+                      "description": "loan rate in %, min - 3%, max - 40%",
+                      "example": "5"
+                    },
+                    "term": {
+                      "type": "number",
+                      "description": "loan term in months, min - 6 months, max - 60 months",
+                      "example": "12"
+                    }
+                  }
                 },
                 "client": {
-                  "type": "string",
-                  "description": "id of the selected client",
-                  "example": "66914abd776d15fcaa090fae"
-                },
+                  "type": "object",
+                   "properties": {
+                    "_id": {
+                      "type": "string",
+                      "description": "Client_id",
+                      "example": "6697b93d58a0f618d7ee0426"
+                      }, 
+                      "name": {
+                        "type": "string",
+                        "description": "Client's name",
+                        "example": "agency abc"
+                      },
+                      "phone": {
+                        "type": "string",
+                        "description": "Client's phone number UA operator",
+                        "example": "+380971234567"
+                      },
+                      "contactPerson": {
+                        "type": "string",
+                        "description": "Contact person of the client",
+                        "example": "Alex"
+                      }
+                   } 
+                },              
                 "amount": {
                   "type": "string",
-                  "description": "loan amount, min - 100000, max - 10000000",
+                  "description": "loan amount, min - 100 000, max - 10 000 000",
                   "example": "200000"
                 },
                 "dateIssued": {
                   "type": "string",
-                    "format": "date",
-                  "description": "loan issue date",
+                  "format": "date",
+                  "description": "loan issue date, current date by default",
                   "example": "2024-07-17T12:29:49.457Z"
                 },
                 "dueDate": {
                   "type": "string",
-                    "format": "date",
+                  "format": "date",
                   "description": "the day when repayment has to be made, calculated automatically based on selected loan type",
                   "example": "2025-07-17T12:29:49.457Z"
                 },
@@ -1653,7 +1736,8 @@
         "properties": {
           "status": {
             "type": "string",
-             "description": "response status message"
+            "description": "response status message",
+            "example": "Request succeeded"
           },
           "loan": {
             "type": "object",
@@ -1664,24 +1748,65 @@
                 "example": "669577190528ef0f7c59b813"
               }, 
               "loanType": {
-                "type": "string",
-                "description": "id of the selected loan type",
-                "example": "669191099a815f9ff35a46b9"
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "description": "LoanType_id",
+                    "example": "669191099a815f9ff35a46b9"
+                  }, 
+                  "name": {
+                    "type": "string",
+                    "enum" : [ "Term loan", "Equipment Loan", "Commercial Real Estate Loan", "Startup Loan"],
+                    "description": "type of loan",
+                    "example": "Startup Loan"
+                  },
+                  "rate": {
+                    "type": "number",
+                    "description": "loan rate in %, min - 3%, max - 40%",
+                    "example": "5"
+                  },
+                  "term": {
+                    "type": "number",
+                    "description": "loan term in months, min - 6 months, max - 60 months",
+                    "example": "12"
+                  }
+                }
               },
               "client": {
-                "type": "string",
-                "description": "id of the selected client",
-                "example": "66914abd776d15fcaa090fae"
-              },
+                "type": "object",
+                 "properties": {
+                  "_id": {
+                    "type": "string",
+                    "description": "Client_id",
+                    "example": "6697b93d58a0f618d7ee0426"
+                    }, 
+                    "name": {
+                      "type": "string",
+                      "description": "Client's name",
+                      "example": "agency abc"
+                    },
+                    "phone": {
+                      "type": "string",
+                      "description": "Client's phone number UA operator",
+                      "example": "+380971234567"
+                    },
+                    "contactPerson": {
+                      "type": "string",
+                      "description": "Contact person of the client",
+                      "example": "Alex"
+                    }
+                 } 
+              },      
               "amount": {
                 "type": "string",
-                "description": "loan amount, min - 100000, max - 10000000",
+                "description": "loan amount, min - 100 000, max - 10 000 000",
                 "example": "200000"
               },
               "dateIssued": {
                 "type": "string",
-                 "format": "date",
-                "description": "loan issue date",
+                "format": "date",
+                "description": "loan issue date, current date by default",
                 "example": "2024-07-17T12:29:49.457Z"
               },
               "dueDate": {
@@ -1733,12 +1858,13 @@
           }
         }
       },
-      "UpdateLoaneResponse": {
+      "UpdateLoanResponse": {
         "type": "object", 
         "properties": {
           "status": {
             "type": "string",
-            "description": "response status message"
+            "description": "response status message",
+            "example": "Request succeeded"
           },
           "loan": {
             "type": "object",
@@ -1749,24 +1875,65 @@
                 "example": "669577190528ef0f7c59b813"
               }, 
               "loanType": {
-                "type": "string",
-                "description": "id of the selected loan type",
-                "example": "669191099a815f9ff35a46b9"
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "description": "LoanType_id",
+                    "example": "669191099a815f9ff35a46b9"
+                  }, 
+                  "name": {
+                    "type": "string",
+                    "enum" : [ "Term loan", "Equipment Loan", "Commercial Real Estate Loan", "Startup Loan"],
+                    "description": "type of loan",
+                    "example": "Startup Loan"
+                  },
+                  "rate": {
+                    "type": "number",
+                    "description": "loan rate in %, min - 3%, max - 40%",
+                    "example": "5"
+                  },
+                  "term": {
+                    "type": "number",
+                    "description": "loan term in months, min - 6 months, max - 60 months",
+                    "example": "12"
+                  }
+                }
               },
               "client": {
-                "type": "string",
-                "description": "id of the selected client",
-                "example": "66914abd776d15fcaa090fae"
-              },
+                "type": "object",
+                 "properties": {
+                  "_id": {
+                    "type": "string",
+                    "description": "Client_id",
+                    "example": "6697b93d58a0f618d7ee0426"
+                    }, 
+                    "name": {
+                      "type": "string",
+                      "description": "Client's name",
+                      "example": "agency abc"
+                    },
+                    "phone": {
+                      "type": "string",
+                      "description": "Client's phone number UA operator",
+                      "example": "+380971234567"
+                    },
+                    "contactPerson": {
+                      "type": "string",
+                      "description": "Contact person of the client",
+                      "example": "Alex"
+                    }
+                 } 
+              },      
               "amount": {
                 "type": "string",
-                "description": "loan amount, min - 100000, max - 10000000",
+                "description": "loan amount, min - 100 000, max - 10 000 000",
                 "example": "200000"
               },
               "dateIssued": {
                 "type": "string",
-                 "format": "date",
-                "description": "loan issue date",
+                "format": "date",
+                "description": "loan issue date, current date by default",
                 "example": "2024-07-17T12:29:49.457Z"
               },
               "dueDate": {
@@ -1806,15 +1973,14 @@
             }
           }
         }
-      },
-      "securitySchemes": {
-        "Bearer": {
-          "type": "http",
-          "scheme": "bearer",
-          "bearerFormat": "JWT"
-        }
       }
-    }
-  }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    } 
   }
 }

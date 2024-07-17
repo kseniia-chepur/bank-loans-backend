@@ -6,7 +6,7 @@ const httpErrorMsg = {
   'CANNOT_DELETE_LOANTYPE': 'Cannot delete loan type with existing loans',
   'CANNOT_DELETE_CLIENT': 'Cannot delete client with existing loans',
   'CLIENT_EXISTS': 'Client already exists',
-  'NOT_FOUND': 'Client not found',
+  'CLIENT_NOT_FOUND': 'Client not found',
   'DATA_NOT_FOUND': 'Data not found',
   'USER_NOT_FOUND': 'User not found',
   'FORBIDDEN': 'Forbidden: No permission to access this resource',
