@@ -16,7 +16,7 @@ const loanTypeSchema = new Schema(
       type: Number,
       required: true,
     }, 
-    term: { // Term in months
+    term: { 
       type: Number,
       required: true,
     }

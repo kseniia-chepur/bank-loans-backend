@@ -6,7 +6,7 @@ const { httpErrorMsg } = require("../constants");
 
 exports.createClient = (clientData) => Client.create(clientData);
 
-exports.getAllClients = () => Client.find();
+exports.getAllClients = async () => Client.find();
 
 exports.getOneClient = (id) => Client.findById(id);
 

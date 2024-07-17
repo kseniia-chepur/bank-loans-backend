@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken');
 
 const { HttpError } = require("../utils");
-const { userRoles, httpErrorMsg } = require("../constants");
+const { httpErrorMsg } = require("../constants");
 const { User } = require("../models");
 
 
@@ -34,13 +34,13 @@ exports.loginUser = async ({ email, password }) => {
   const user = await User.findOne({ email });
 
   if (!user) {
-    throw new HttpError(401, httpErrorMsg.INVALID_LOGIN_CREDENTIALS);
+    throw new HttpError(404, httpErrorMsg.USER_NOT_FOUND);
   }
 
   const isValidPassword = await bcrypt.compare(password, user.password);
 
   if (!isValidPassword) {
-    throw new HttpError(401, httpErrorMsg.INVALID_LOGIN_CREDENTIALS);
+    throw new HttpError(400, httpErrorMsg.INVALID_LOGIN_CREDENTIALS);
   }
 
   const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {

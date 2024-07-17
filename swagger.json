@@ -1,0 +1,1820 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Bank loans API",
+    "description": "API documentation for the Bank loans app",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": ""
+    },
+    {
+      "url": "http://localhost:3000/api/v1"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "Authentication endpoints"
+    },
+    { "name": "Client", 
+    "description": "Client endpoints"
+    },
+    {
+      "name": "LoanType",
+      "description": "LoanType endpoints"
+    },
+    {
+      "name": "Loan",
+      "description": "Loan endpoints"
+    }
+  ],
+  "paths": {
+    "/auth/signup": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "User signup",
+        "parameters": [],
+        "requestBody": {
+          "description": "Signup object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignupRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Request succeeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SignupResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "409": {
+            "description": "User already exists"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "User login",
+        "parameters": [],
+        "requestBody": {
+          "description": "Login object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request succeeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid login credentials"
+          },
+          "401": {
+            "description": "Unauthorized: Access is denied"
+          },
+          "403": {
+            "description": "Forbidden: No permission to access this resource"
+          },
+          "404": {
+            "description": "User not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/auth/cabinet": {
+      "get": {
+        "tags": ["Auth"],
+        "summary": "User cabinet",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Request succeeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CabinetResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized: Access is denied"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+   
+    "/clients": {
+      "post": {
+        "tags": ["Client"],
+        "summary": "New client entity",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "New client data",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateClientRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Request succeeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateClientResponse"
+                }
+              }
+            }
+          },
+
+          "400": {
+            "description": "Invalid data"
+          },
+          "401": {
+            "description": "Unauthorized: Access is denied"
+          },
+          "409": {
+            "description": "Client already exists"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Client"],
+        "summary": "List of clients",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Request succeeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetClientsResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized: Access is denied"
+          }, 
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },  
+    "/clients/{id}": {
+      "get": {
+        "tags": ["Client"],
+        "summary": "Client's info",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ClientId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "security": [{ "Bearer": [] }],   
+        "responses": {
+          "200": {
+            "description": "Request succeeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOneClientResponse"
+                }
+              }
+            }
+          },
+
+          "400": {
+            "description": "Invalid data"
+          },
+          "401": {
+            "description": "Unauthorized: Access is denied"
+          },
+          "404": {
+            "description": "Client not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Client"],
+        "summary": "Client's update",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ClientId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Client's fields update",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateClientRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request succeeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateClientResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "401": {
+            "description": "Unauthorized: Access is denied"
+          },
+          "404": {
+            "description": "Client not found"
+          },
+          "409": {
+            "description": "Client already exists"
+          },
+          "500": {
+             "description": "Internal server error"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Client"],
+        "summary": "Client deletion",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "ClientId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "204": {
+            "description": "Request succeeded"
+          },
+
+          "400": {
+            "description": "Cannot delete client with existing loans"
+          },
+          "401": {
+            "description": "Unauthorized: Access is denied"
+          },
+          "403": {
+            "description": "Forbidden: No permission to access this resource"
+          },
+          "404": {
+            "description": "Client not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/loantypes": {
+      "post": {
+        "tags": ["LoanType"],
+        "summary": "New loan type entity",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "New loan type data",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateLoanTypeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Request succeeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateLoanTypeResponse"
+                }
+              }
+            }
+          },
+
+          "400": {
+            "description": "Invalid data"
+          },
+          "401": {
+            "description": "Unauthorized: Access is denied"
+          },
+          "403": {
+            "description": "Forbidden: No permission to access this resource"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "get": {
+        "tags": ["LoanType"],
+        "summary": "List of loan types",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Request succeeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetLoanTypeResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized: Access is denied"
+          }, 
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },  
+    "/loantypes/{id}": {
+      "get": {
+        "tags": ["LoanType"],
+        "summary": "Loan type info",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "LoanTypeId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Get one loan type info",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetOneLoanTypeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request succeeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOneLoanTypeResponse"
+                }
+              }
+            }
+          },
+
+          "400": {
+            "description": "Invalid data"
+          },
+          "401": {
+            "description": "Unauthorized: Access is denied"
+          },
+          "404": {
+            "description": "Data not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "patch": {
+        "tags": ["LoanType"],
+        "summary": "Loan type update",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "LoanTypeId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Loan type fields update",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLoanTypeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request succeeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateLoanTypeResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "401": {
+            "description": "Unauthorized: Access is denied"
+          },
+          "403": {
+            "description": "Forbidden: No permission to access this resource"
+          },
+          "404": {
+            "description": "Data not found"
+          },
+          "500": {
+             "description": "Internal server error"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["LoanType"],
+        "summary": "Loan type deletion",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "LoanTypeId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "204": {
+            "description": "Request succeeded"
+          },
+
+          "400": {
+            "description": "Cannot delete loan type with existing loans"
+          },
+          "401": {
+            "description": "Unauthorized: Access is denied"
+          },
+          "403": {
+            "description": "Forbidden: No permission to access this resource"
+          },
+          "404": {
+            "description": "Data not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/loans": {
+      "post": {
+        "tags": ["Loan"],
+        "summary": "New loan entity",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "New loan data",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateLoanRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Request succeeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateLoanResponse"
+                }
+              }
+            }
+          },
+
+          "400": {
+            "description": "Invalid data"
+          },
+          "401": {
+            "description": "Unauthorized: Access is denied"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Loan"],
+        "summary": "List of loans",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Request succeeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetLoansResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized: Access is denied"
+          }, 
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },  
+    "/loans/{id}": {
+      "get": {
+        "tags": ["Loan"],
+        "summary": "Loan info",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "LoanId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Get one loan info",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetOneLoanRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request succeeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetOneLoanResponse"
+                }
+              }
+            }
+          },
+
+          "400": {
+            "description": "Invalid data"
+          },
+          "401": {
+            "description": "Unauthorized: Access is denied"
+          },
+          "404": {
+            "description": "Data not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Loan"],
+        "summary": "Loan update",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "LoanId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Loan type fields update",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLoanRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Request succeeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateLoanTypeResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid data"
+          },
+          "401": {
+            "description": "Unauthorized: Access is denied"
+          },
+          "404": {
+            "description": "Data not found"
+          },
+          "500": {
+             "description": "Internal server error"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Loan"],
+        "summary": "Loan deletion",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "description": "LoanId",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "204": {
+            "description": "Request succeeded"
+          },
+
+          "400": {
+            "description": "Cannot delete loan with existing debt obligations"
+          },
+          "401": {
+            "description": "Unauthorized: Access is denied"
+          },
+          "403": {
+            "description": "Forbidden: No permission to access this resource"
+          },
+          "404": {
+            "description": "Data not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+  "components": {
+    "schemas": {
+      "SignupRequest": {
+        "type": "object",
+        "required": ["email", "password"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email",
+            "example": "user@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "description": "User's password",
+            "example": "User#1234"
+          },
+          "role": {
+            "type": "string",
+            "enum" : [ "specialist", "admin" ],
+            "example": "specialist" 
+          } 
+        }
+      },
+      "SignupResponse": {
+       "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "response status message"
+          },
+          "user": {
+            "type": "object",
+            "properties": { 
+              "email": {
+                "type": "string",
+                "format": "email",
+                "description": "User's email address",
+                "example": "user@gmail.com"
+              },
+              "role": {
+                "type": "string",
+                "enum" : [ "specialist", "admin" ],
+                "example": "specialist" 
+              },
+              "_id": {
+                "type": "string",
+                "description": "User _id",
+                "example": "66939337055c87c83a923aea"
+              }, 
+              "createdAt": {
+                "type": "string",
+                "format": "date",
+                "description": "time of creation",
+                "example": "2024-07-14T08:58:32.012Z"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date",
+                "description": "the last update time",
+                "example": "2024-07-14T08:58:32.012Z"
+              } 
+            }
+          },
+          "token": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OTM5MzM3MDU1Yzg3YzgzYTkyM2FlYSIsImlhdCI6MTcyMTIxNTM0OCwiZXhwIjoxNzIxMzAxNzQ4fQ.0ztNTw_-pRKfnX69eDM_QhmgN7B59mll0kHd_gdYjes"
+          } 
+        }
+      },
+      "LoginRequest": {
+        "type": "object",
+        "required": ["email", "password"],
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "User email address",
+            "format": "email",
+            "example": "user@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "description": "User's password",
+            "example": "User#1234"
+          } 
+        }
+      },
+      "LoginResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "response status message"
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string",
+                "description": "User _id",
+                "example": "66939337055c87c83a923aea"
+              },
+              "email": {
+                "type": "string",
+                "format": "email",
+                "description": "User email address",
+                "example": "user@gmail.com"
+              },
+              "role": {
+                "type": "string",
+                "enum" : [ "specialist", "admin" ],
+                "example": "specialist" 
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date",
+                "description": "time of creation",
+                "example": "2024-07-14T08:58:32.012Z"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date",
+                "description": "the last update time",
+                "example": "2024-07-14T08:58:32.012Z"
+              }
+            } 
+          },
+          "token": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OTM5MzM3MDU1Yzg3YzgzYTkyM2FlYSIsImlhdCI6MTcyMTIxNTM0OCwiZXhwIjoxNzIxMzAxNzQ4fQ.0ztNTw_-pRKfnX69eDM_QhmgN7B59mll0kHd_gdYjes"
+          }
+        }
+      },
+      "CabinetResponse": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "User _id",
+            "example": "66939337055c87c83a923aea"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "User email address",
+            "example": "user@gmail.com"
+          },
+          "role": {
+            "type": "string",
+            "enum" : [ "specialist", "admin" ],
+            "example": "specialist" 
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date",
+            "description": "time of creation",
+            "example": "2024-07-14T08:58:32.012Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date",
+            "description": "the last update time",
+            "example": "2024-07-14T08:58:32.012Z"
+          }
+        }
+      },
+      "CreateClientRequest": {
+        "type": "object",
+        "required": ["name", "ownership", "address", "phone", "contactPerson"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Client's name",
+            "example": "agency abc"
+          },
+          "ownership": {
+            "type": "string",
+            "description": "Ownership type",
+            "enum" : [ "LLC", "private", "joint stock"],
+            "example": "private"
+          },
+          "address": {
+            "type": "string",
+            "description": "Client's address details",
+            "example": "Kyiv, UA"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Client's phone number, only Ukrainian mobile operators accepted",
+            "example": "+380971234567"
+          },
+          "contactPerson": {
+            "type": "string",
+            "description": "Contact person of the client",
+            "example": "Alex"
+          }
+        }
+      },
+      "CreateClientResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "response status message"
+          },
+          "client": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string",
+                "description": "Client _id",
+                "example": "6697b93d58a0f618d7ee0426"
+              }, 
+              "name": {
+                "type": "string",
+                "description": "Client's name",
+                "example": "agency abc"
+              },
+              "ownership": {
+                "type": "string",
+                "description": "Ownership type",
+                "enum" : [ "LLC", "private", "joint stock"],
+                "example": "private"
+              },
+              "address": {
+                "type": "string",
+                "description": "Client's address details",
+                "example": "Kyiv, UA"
+              },
+              "phone": {
+                "type": "string",
+                "description": "Client's phone number UA operator",
+                "example": "+380971234567"
+              },
+              "contactPerson": {
+                "type": "string",
+                "description": "Contact person of the client",
+                "example": "Alex"
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date",
+                "description": "time of creation",
+                "example": "2024-07-14T08:58:32.012Z"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date",
+                "description": "the last update time",
+                "example": "2024-07-14T08:58:32.012Z"
+              }
+            }
+          }
+        }
+      },
+      "GetClientsResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "response status message"
+          },
+          "clients": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "description": "Client _id",
+                  "example": "6697b93d58a0f618d7ee0426"
+                }, 
+                "name": {
+                  "type": "string",
+                  "description": "Client's name",
+                  "example": "agency abc"
+                },
+                "ownership": {
+                  "type": "string",
+                  "description": "Ownership type",
+                  "enum" : [ "LLC", "private", "joint stock"],
+                  "example": "private"
+                },
+                "address": {
+                  "type": "string",
+                  "description": "Client's address details",
+                  "example": "Kyiv, UA"
+                },
+                "phone": {
+                  "type": "string",
+                  "description": "Client's phone number UA operator",
+                  "example": "+380971234567"
+                },
+                "contactPerson": {
+                  "type": "string",
+                  "description": "Contact person of the client",
+                  "example": "Alex"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date",
+                  "description": "time of creation",
+                  "example": "2024-07-14T08:58:32.012Z"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date",
+                  "description": "the last update time",
+                  "example": "2024-07-14T08:58:32.012Z"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetOneClientResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+             "description": "response status message"
+          },
+          "client": {
+            "type": "object",
+            "properties": {
+            "_id": {
+              "type": "string",
+              "description": "Client_id",
+              "example": "6697b93d58a0f618d7ee0426"
+            }, 
+            "name": {
+              "type": "string",
+              "description": "Client's name",
+              "example": "agency abc"
+            },
+            "ownership": {
+              "type": "string",
+              "description": "Ownership type",
+              "enum" : [ "LLC", "private", "joint stock"],
+              "example": "private"
+            },
+            "address": {
+              "type": "string",
+              "description": "Client's address details",
+              "example": "Kyiv, UA"
+            },
+            "phone": {
+              "type": "string",
+              "description": "Client's phone number UA operator",
+              "example": "+380971234567"
+            },
+            "contactPerson": {
+              "type": "string",
+              "description": "Contact person of the client",
+              "example": "Alex"
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date",
+              "description": "time of creation",
+              "example": "2024-07-14T08:58:32.012Z"
+            },
+            "updatedAt": {
+              "type": "string",
+              "format": "date",
+              "description": "the last update time",
+              "example": "2024-07-14T08:58:32.012Z"
+            }
+          }
+          }
+        }
+      },
+      "UpdateClientRequest": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "Client's address details",
+            "example": "Kyiv, UA"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Client's phone number UA operator",
+            "example": "+380971234567"
+          },
+          "contactPerson": {
+            "type": "string",
+            "description": "Contact person of the client",
+            "example": "Alex"
+          }
+        }
+      },
+      "UpdateClientResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+             "description": "response status message"
+          },
+          "client": {
+            "type": "object",
+            "properties": {
+              "_id": {
+              "type": "string",
+              "description": "Client_id",
+              "example": "6697b93d58a0f618d7ee0426"
+              }, 
+              "name": {
+                "type": "string",
+                "description": "Client's name",
+                "example": "agency abc"
+              },
+              "ownership": {
+                "type": "string",
+                "description": "Ownership type",
+                "enum" : [ "LLC", "private", "joint stock"],
+                "example": "private"
+              },
+              "address": {
+                "type": "string",
+                "description": "Client's address details",
+                "example": "Kyiv, UA"
+              },
+              "phone": {
+                "type": "string",
+                "description": "Client's phone number UA operator",
+                "example": "+380971234567"
+              },
+              "contactPerson": {
+                "type": "string",
+                "description": "Contact person of the client",
+                "example": "Alex"
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date",
+                "description": "time of creation",
+                "example": "2024-07-14T08:58:32.012Z"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date",
+                "description": "the last update time",
+                "example": "2024-07-14T08:58:32.012Z"
+              }
+            }
+          }
+        }
+      },
+      "CreateLoanTypeRequest": {
+        "type": "object",
+        "required": ["name", "conditions", "rate", "term"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum" : [ "Term loan", "Equipment Loan", "Commercial Real Estate Loan", "Startup Loan"],
+            "description": "Type of loan",
+            "example": "Startup Loan"
+          },
+          "conditions": {
+            "type": "string",
+            "description": "loan conditions applied", 
+            "example": "business plan"
+          },
+          "rate": {
+            "type": "number",
+            "description": "loan rate in %, min - 3%, max - 40%",
+            "example": "5"
+          },
+          "term": {
+            "type": "number",
+            "description": "loan term in months, min - 6 months, max - 60 months",
+            "example": "12"
+          }
+        }
+      },
+      "CreateLoanTypeResponse": {
+        "type": "object", 
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "response status message"
+          },
+          "loan type": {
+            "type": "object",
+             "properties": {
+              "_id": {
+                "type": "string",
+                "description": "LoanType_id",
+                "example": "669191099a815f9ff35a46b9"
+              }, 
+              "name": {
+                "type": "string",
+                "enum" : [ "Term loan", "Equipment Loan", "Commercial Real Estate Loan", "Startup Loan"],
+                "description": "type of loan",
+                "example": "Startup Loan"
+              },
+              "conditions": {
+                "type": "string",
+                "description": "loan conditions applied", 
+                "example": "business plan"
+              },
+              "rate": {
+                "type": "number",
+                "description": "loan rate in %, min - 3%, max - 40%",
+                "example": "5"
+              },
+              "term": {
+                "type": "number",
+                "description": "loan term in months, min - 6 months, max - 60 months",
+                "example": "12"
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date",
+                "description": "time of creation",
+                "example": "2024-07-14T08:58:32.012Z"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date",
+                "description": "the last update time",
+                "example": "2024-07-14T08:58:32.012Z"
+              }
+            }
+          }
+        }
+      },
+      "GetLoanTypesResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "response status message"
+          },
+          "loan types": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "description": "LoanType_id",
+                  "example": "669191099a815f9ff35a46b9"
+                  }, 
+                  "name": {
+                    "type": "string",
+                    "enum" : [ "Term loan", "Equipment Loan", "Commercial Real Estate Loan", "Startup Loan"],
+                    "description": "type of loan",
+                    "example": "Startup Loan"
+                  },
+                  "conditions": {
+                    "type": "string",
+                    "description": "loan conditions applied", 
+                    "example": "business plan"
+                  },
+                  "rate": {
+                    "type": "number",
+                    "description": "loan rate in %, min - 3%, max - 40%",
+                    "example": "5"
+                  },
+                  "term": {
+                    "type": "number",
+                    "description": "loan term in months, min - 6 months, max - 60 months",
+                    "example": "12"
+                  },
+                  "createdAt": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "time of creation",
+                    "example": "2024-07-14T08:58:32.012Z"
+                  },
+                  "updatedAt": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "the last update time",
+                    "example": "2024-07-14T08:58:32.012Z"
+                  }
+                }            
+              }
+          }
+        }
+      },
+      "GetOneLoanTypeResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+             "description": "response status message"
+          },
+          "loan type": {
+            "type": "object",
+             "properties": {
+              "_id": {
+                "type": "string",
+                "description": "LoanType_id",
+                "example": "669191099a815f9ff35a46b9"
+              }, 
+              "name": {
+                "type": "string",
+                "enum" : [ "Term loan", "Equipment Loan", "Commercial Real Estate Loan", "Startup Loan"],
+                "description": "Type of loan",
+                "example": "Startup Loan"
+              },
+              "conditions": {
+                "type": "string",
+                "description": "loan conditions applied", 
+                "example": "business plan"
+              },
+              "rate": {
+                "type": "number",
+                "description": "loan rate in %, min - 3%, max - 40%",
+                "example": "5"
+              },
+              "term": {
+                "type": "number",
+                "description": "loan term in months, min - 6 months, max - 60 months",
+                "example": "12"
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date",
+                "description": "time of creation",
+                "example": "2024-07-14T08:58:32.012Z"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date",
+                "description": "the last update time",
+                "example": "2024-07-14T08:58:32.012Z"
+              }
+            }
+          }
+        }
+      },
+      "UpdateLoanTypeRequest": {
+        "type": "object",
+        "properties": {
+          "conditions": {
+            "type": "string",
+            "description": "loan conditions applied", 
+            "example": "business plan"
+          },
+          "rate": {
+            "type": "number",
+            "description": "loan rate in %, min - 3%, max - 40%",
+            "example": "10"
+          },
+          "term": {
+            "type": "number",
+            "description": "loan term in months, min - 6 months, max - 60 months",
+            "example": "24"
+          }
+        }
+      },
+      "UpdateLoanTypeResponse": {
+        "type": "object", 
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "response status message"
+          },
+          "loan type": {
+            "type": "object",
+             "properties": {
+              "_id": {
+                "type": "string",
+                "description": "LoanType_id",
+                "example": "669191099a815f9ff35a46b9"
+              }, 
+              "name": {
+                "type": "string",
+                "enum" : [ "Term loan", "Equipment Loan", "Commercial Real Estate Loan", "Startup Loan"],
+                "description": "type of loan",
+                "example": "Startup Loan"
+              },
+              "conditions": {
+                "type": "string",
+                "description": "loan conditions applied", 
+                "example": "business plan"
+              },
+              "rate": {
+                "type": "number",
+                "description": "loan rate in %, min - 3%, max - 40%",
+                "example": "5"
+              },
+              "term": {
+                "type": "number",
+                "description": "loan term in months, min - 6 months, max - 60 months",
+                "example": "12"
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date",
+                "description": "time of creation",
+                "example": "2024-07-14T08:58:32.012Z"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date",
+                "description": "the last update time",
+                "example": "2024-07-14T08:58:32.012Z"
+              }
+            }
+          }
+        }
+      },
+      "CreateLoanRequest": {
+        "type": "object",
+        "required": ["loanType", "client", "amount"],
+        "properties": {
+          "loanType": {
+            "type": "string",
+            "description": "id of existing loan type",
+            "example": "669191099a815f9ff35a46b9"
+          },
+          "client": {
+            "type": "string",
+            "description": "id of the existing client",
+            "example": "66914abd776d15fcaa090fae"
+          },
+          "amount": {
+            "type": "string",
+            "description": "loan amount, min - 100000, max - 10000000",
+            "example": "200000"
+          },
+          "dateIssued": {
+            "type": "string",
+             "format": "date",
+            "description": "loan issue date",
+            "example": "2024-07-17T12:29:49.457Z"
+          },
+          "parts": {
+            "type": "number",
+            "description": "quantity of loan payments",
+            "example": "2"
+          }
+        }
+      },
+      "CreateLoanResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "response status message"
+          },
+          "loan": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string",
+                "description": "Loan_id",
+                "example": "669577190528ef0f7c59b813"
+              }, 
+              "loanType": {
+                "type": "string",
+                "description": "id of selected loan type",
+                "example": "669191099a815f9ff35a46b9"
+              },
+              "client": {
+                "type": "string",
+                "description": "id of the selected client",
+                "example": "66914abd776d15fcaa090fae"
+              },
+              "amount": {
+                "type": "string",
+                "description": "loan amount, min - 100000, max - 10000000",
+                "example": "200000"
+              },
+              "dateIssued": {
+                "type": "string",
+                 "format": "date",
+                "description": "loan issue date",
+                "example": "2024-07-17T12:29:49.457Z"
+              },
+              "dueDate": {
+                "type": "string",
+                 "format": "date",
+                "description": "the day when repayment has to be made, calculated automatically based on selected loan type",
+                "example": "2025-07-17T12:29:49.457Z"
+              },
+              "parts": {
+                "type": "number",
+                "description": "quantity of loan payments",
+                "example": "2"
+              },
+              "fineAmount": {
+                "type": "number",
+                "description": "fine that can be charged in case of overdue, calculates when actual repayment date is known, 0 upon creation",
+                "example": "0"
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date",
+                "description": "time of creation",
+                "example": "2024-07-14T08:58:32.012Z"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date",
+                "description": "the last update time",
+                "example": "2024-07-14T08:58:32.012Z"
+              }
+            }
+          }
+        }
+      },
+      "GetLoansResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "response status message"
+          },
+          "loans": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "description": "Loan_id",
+                  "example": "669577190528ef0f7c59b813"
+                }, 
+                "loanType": {
+                  "type": "string",
+                  "description": "id of the selected loan type",
+                  "example": "669191099a815f9ff35a46b9"
+                },
+                "client": {
+                  "type": "string",
+                  "description": "id of the selected client",
+                  "example": "66914abd776d15fcaa090fae"
+                },
+                "amount": {
+                  "type": "string",
+                  "description": "loan amount, min - 100000, max - 10000000",
+                  "example": "200000"
+                },
+                "dateIssued": {
+                  "type": "string",
+                    "format": "date",
+                  "description": "loan issue date",
+                  "example": "2024-07-17T12:29:49.457Z"
+                },
+                "dueDate": {
+                  "type": "string",
+                    "format": "date",
+                  "description": "the day when repayment has to be made, calculated automatically based on selected loan type",
+                  "example": "2025-07-17T12:29:49.457Z"
+                },
+                "parts": {
+                  "type": "number",
+                  "description": "quantity of loan payments",
+                  "example": "2"
+                },
+                "dateRepaid": {
+                  "type": "string",
+                  "format": "date",
+                  "description": "the day when repayment was made",
+                  "example": "2025-07-17T12:29:49.457Z"
+                },
+                "fineAmount": {
+                  "type": "number",
+                  "description": "fine that can be charged in case of overdue, calculates automatically when actual repayment date is known, 0 upon creation",
+                  "example": "0"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date",
+                  "description": "time of creation",
+                  "example": "2024-07-14T08:58:32.012Z"
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date",
+                  "description": "the last update time",
+                  "example": "2024-07-14T08:58:32.012Z"
+                }
+              }
+            }
+          }
+        } 
+      },
+      "GetOneLoanResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+             "description": "response status message"
+          },
+          "loan": {
+            "type": "object",
+             "properties": {
+              "_id": {
+                "type": "string",
+                "description": "Loan_id",
+                "example": "669577190528ef0f7c59b813"
+              }, 
+              "loanType": {
+                "type": "string",
+                "description": "id of the selected loan type",
+                "example": "669191099a815f9ff35a46b9"
+              },
+              "client": {
+                "type": "string",
+                "description": "id of the selected client",
+                "example": "66914abd776d15fcaa090fae"
+              },
+              "amount": {
+                "type": "string",
+                "description": "loan amount, min - 100000, max - 10000000",
+                "example": "200000"
+              },
+              "dateIssued": {
+                "type": "string",
+                 "format": "date",
+                "description": "loan issue date",
+                "example": "2024-07-17T12:29:49.457Z"
+              },
+              "dueDate": {
+                "type": "string",
+                 "format": "date",
+                "description": "the day when repayment has to be made, calculated automatically based on selected loan type",
+                "example": "2025-07-17T12:29:49.457Z"
+              },
+              "parts": {
+                "type": "number",
+                "description": "quantity of loan payments",
+                "example": "2"
+              },
+              "dateRepaid": {
+                "type": "string",
+                "format": "date",
+                "description": "the day when repayment was made",
+                "example": "2025-07-17T12:29:49.457Z"
+              },
+              "fineAmount": {
+                "type": "number",
+                "description": "fine that can be charged in case of overdue, calculates automatically when actual repayment date is known, 0 upon creation",
+                "example": "0"
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date",
+                "description": "time of creation",
+                "example": "2024-07-14T08:58:32.012Z"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date",
+                "description": "the last update time",
+                "example": "2024-07-14T08:58:32.012Z"
+              }
+            }
+          }
+        }
+      },
+      "UpdateLoanRequest": {
+        "type": "object",
+        "properties": {
+          "dateRepaid": {
+            "type": "string",
+            "format": "date",
+            "description": "the day when repayment was made",
+            "example": "2024-07-17T12:29:49.457Z"
+          }
+        }
+      },
+      "UpdateLoaneResponse": {
+        "type": "object", 
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "response status message"
+          },
+          "loan": {
+            "type": "object",
+             "properties": {
+              "_id": {
+                "type": "string",
+                "description": "Loan_id",
+                "example": "669577190528ef0f7c59b813"
+              }, 
+              "loanType": {
+                "type": "string",
+                "description": "id of the selected loan type",
+                "example": "669191099a815f9ff35a46b9"
+              },
+              "client": {
+                "type": "string",
+                "description": "id of the selected client",
+                "example": "66914abd776d15fcaa090fae"
+              },
+              "amount": {
+                "type": "string",
+                "description": "loan amount, min - 100000, max - 10000000",
+                "example": "200000"
+              },
+              "dateIssued": {
+                "type": "string",
+                 "format": "date",
+                "description": "loan issue date",
+                "example": "2024-07-17T12:29:49.457Z"
+              },
+              "dueDate": {
+                "type": "string",
+                 "format": "date",
+                "description": "the day when repayment has to be made, calculated automatically based on selected loan type",
+                "example": "2025-07-17T12:29:49.457Z"
+              },
+              "parts": {
+                "type": "number",
+                "description": "quantity of loan payments",
+                "example": "2"
+              },
+              "dateRepaid": {
+                "type": "string",
+                "format": "date",
+                "description": "the day when repayment was made",
+                "example": "2025-07-17T12:29:49.457Z"
+              },
+              "fineAmount": {
+                "type": "number",
+                "description": "fine that can be charged in case of overdue, calculates automatically when actual repayment date is known, 0 upon creation",
+                "example": "0"
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date",
+                "description": "time of creation",
+                "example": "2024-07-14T08:58:32.012Z"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date",
+                "description": "the last update time",
+                "example": "2024-07-14T08:58:32.012Z"
+              }
+            }
+          }
+        }
+      },
+      "securitySchemes": {
+        "Bearer": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
+      }
+    }
+  }
+  }
+}

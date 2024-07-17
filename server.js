@@ -2,9 +2,11 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv').config();
 const mongoose = require('mongoose');
+const { serve, setup } = require('swagger-ui-express');
 
 const { loanRouter, clientRouter, loanTypesRouter, authRouter } = require('./routes');
 const { errorController } = require('./controllers');
+const swaggerDocs = require('./swagger.json');
 
 process.env.MODE === 'production' 
   ? (PORT = process.env.PROD_PORT)
@@ -24,6 +26,8 @@ app.use(express.json());
 app.use(cors());
 
 const pathPrefix = 'api/v1';
+
+app.use(`/${pathPrefix}/api-docs`, serve, setup(swaggerDocs));
 
 app.use(`/${pathPrefix}/auth`, authRouter);
 app.use(`/${pathPrefix}/clients`, clientRouter);

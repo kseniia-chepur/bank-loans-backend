@@ -8,7 +8,7 @@ exports.handleSignupData = async (req, res, next) => {
     const { value, error } = authValidation.signupUserDataValidator(req.body);
 
   if (error) {
-    throw new HttpError(400, httpErrorMsg.INVALID_LOGIN_CREDENTIALS);
+    throw new HttpError(400, httpErrorMsg.INVALID_DATA);
   }
 
   await userService.checkUserExistsByEmail({ email: value.email });
