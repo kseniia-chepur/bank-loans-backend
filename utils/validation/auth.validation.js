@@ -8,10 +8,9 @@ exports.signupUserDataValidator = (data) =>
     .keys({
       email: Joi.string().email().required(),
       password: Joi.string().regex(regex.PASSWORD_REGEX).required(),
-      role:Joi.string().valid(...Object.values(userRoles)),
+      role: Joi.string().valid(...Object.values(userRoles)),
     })
     .validate(data);
-
 
 exports.loginUserDataValidator = (data) =>
   Joi.object()

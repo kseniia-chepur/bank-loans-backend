@@ -9,14 +9,14 @@ const loanTypeSchema = new Schema(
       required: true,
     },
     conditions: {
-      type: String, 
+      type: String,
       required: true,
     },
     rate: {
       type: Number,
       required: true,
-    }, 
-    term: { 
+    },
+    term: {
       type: Number,
       required: true,
     }

@@ -1,4 +1,4 @@
-const { finePercent, overdueDays } = require("../constants");
+const { finePercent, overdueDays } = require('../constants');
 
 const calculateFine = (amount, dueDate, dateRepaid) => {
   const convertToSec = 1000;
@@ -7,7 +7,7 @@ const calculateFine = (amount, dueDate, dateRepaid) => {
   const convertToDays = 24;
 
   const delta = (new Date(dateRepaid) - new Date(dueDate)) / convertToSec / convertToMin / convertToHours / convertToDays;
-  
+
   let currentFinePercent;
 
   switch (true) {
@@ -23,9 +23,9 @@ const calculateFine = (amount, dueDate, dateRepaid) => {
     case delta < overdueDays.MID:
       currentFinePercent = finePercent.MID;
       break;
-    default: 
+    default:
       currentFinePercent = finePercent.HIGH;
-  }; 
+  };
 
   const fine = (amount / 100) * currentFinePercent;
 

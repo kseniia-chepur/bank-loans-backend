@@ -23,4 +23,3 @@ exports.updateClientDataValidator = (data) =>
       contactPerson: Joi.string().min(2).max(20),
     })
     .validate(data);
-

@@ -4,9 +4,13 @@ module.exports = {
     es6: true,
     node: true,
   },
-  extends: ['standard', 'prettier'],
+  extends: ['standard'],
   parserOptions: {
     ecmaVersion: 2020,
   },
-  rules: {},
-}
+  rules: {
+    'no-unused-vars': 'warn',
+    'comma-dangle': 'off',
+    semi: [2, 'always'],
+  },
+};

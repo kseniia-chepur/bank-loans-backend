@@ -8,4 +8,4 @@ module.exports = {
   Client,
   LoanType,
   User,
-}
+};

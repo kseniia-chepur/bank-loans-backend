@@ -18,4 +18,3 @@ exports.updateLoanDataValidator = (data) =>
       dateRepaid: Joi.date(),
     })
     .validate(data);
-

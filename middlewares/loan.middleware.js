@@ -1,6 +1,6 @@
-const { httpErrorMsg } = require("../constants");
-const { loanService } = require("../services");
-const { loanValidation, HttpError } = require("../utils")
+const { httpErrorMsg } = require('../constants');
+const { loanService } = require('../services');
+const { loanValidation, HttpError } = require('../utils');
 
 exports.handleCreateLoan = async (req, res, next) => {
   try {
@@ -12,7 +12,7 @@ exports.handleCreateLoan = async (req, res, next) => {
 
     req.body = value;
     next();
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 };
@@ -24,7 +24,7 @@ exports.validateLoanId = async (req, res, next) => {
     await loanService.checkLoanExistsById(id);
 
     next();
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 };
@@ -39,7 +39,7 @@ exports.handleUpdateLoan = async (req, res, next) => {
 
     req.body = value;
     next();
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 };

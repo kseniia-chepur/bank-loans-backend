@@ -10,13 +10,13 @@ const clientSchema = new Schema(
     },
     ownership: {
       type: String,
-      enum: Object.values(ownershipTypes), 
+      enum: Object.values(ownershipTypes),
       required: true,
     },
     address: {
       type: String,
       required: true,
-    }, 
+    },
     phone: {
       type: String,
       required: true,
@@ -34,10 +34,10 @@ const clientSchema = new Schema(
   },
 );
 
-clientSchema.pre('save', function(next) {
+clientSchema.pre('save', function (next) {
   console.log(this);
   next();
-})
+});
 
 const Client = model('Client', clientSchema);
 

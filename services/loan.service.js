@@ -1,8 +1,8 @@
-const { Types } = require("mongoose");
+const { Types } = require('mongoose');
 
-const { Loan, Client, LoanType } = require("../models");
-const { HttpError, calculateDueDate, calculateFine } = require("../utils");
-const { httpErrorMsg } = require("../constants");
+const { Loan, Client, LoanType } = require('../models');
+const { HttpError, calculateDueDate, calculateFine } = require('../utils');
+const { httpErrorMsg } = require('../constants');
 
 exports.createLoan = async (loanData) => {
   const { loanType: loanTypeId, client: clientId } = loanData;
@@ -69,7 +69,7 @@ exports.checkLoanExistsById = async (id) => {
   const isIdValid = Types.ObjectId.isValid(id);
 
   if (!isIdValid) {
-      throw new HttpError( 404, httpErrorMsg.DATA_NOT_FOUND);
+    throw new HttpError(404, httpErrorMsg.DATA_NOT_FOUND);
   }
 
   const loanExists = await Loan.exists({ _id: id });

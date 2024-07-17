@@ -7,7 +7,6 @@ const httpErrorMsg = require('./httpErrorMsg');
 const finePercent = require('./finePercent');
 const overdueDays = require('./overdueDays');
 
-
 module.exports = {
   loanTypes,
   ownershipTypes,

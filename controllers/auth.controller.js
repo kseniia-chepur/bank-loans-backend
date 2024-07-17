@@ -1,5 +1,5 @@
-const { successMsg } = require("../constants");
-const { userService } = require("../services")
+const { successMsg } = require('../constants');
+const { userService } = require('../services');
 
 exports.signup = async (req, res, next) => {
   try {
@@ -10,7 +10,7 @@ exports.signup = async (req, res, next) => {
       user,
       token,
     });
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 };
@@ -24,7 +24,7 @@ exports.login = async (req, res, next) => {
       user,
       token,
     });
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 };
@@ -32,7 +32,7 @@ exports.login = async (req, res, next) => {
 exports.showPersonalCabinet = (req, res) => {
   req.user.password = undefined;
 
-    res.status(200).json({
+  res.status(200).json({
     status: successMsg,
     user: req.user,
   });

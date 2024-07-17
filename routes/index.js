@@ -8,4 +8,4 @@ module.exports = {
   loanTypesRouter,
   loanRouter,
   authRouter,
-}
+};

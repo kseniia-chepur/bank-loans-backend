@@ -21,11 +21,10 @@ app.use(`/${pathPrefix}/clients`, clientRouter);
 app.use(`/${pathPrefix}/loantypes`, loanTypesRouter);
 app.use(`/${pathPrefix}/loans`, loanRouter);
 
-
 app.all('*', (req, res) => {
-    res.status(404).json({
-        message: 'Oops! Resource not found.',
-    });
+  res.status(404).json({
+    message: 'Oops! Resource not found.',
+  });
 });
 
 app.use(errorController.globalErrorHandler);

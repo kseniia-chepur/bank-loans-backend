@@ -4,7 +4,7 @@ const loanValidation = require('./validation/loan.validation');
 const authValidation = require('./validation/auth.validation');
 const HttpError = require('./httpError');
 const calculateDueDate = require('./calculateDueDate');
-const calculateFine= require('./calculateFine');
+const calculateFine = require('./calculateFine');
 
 module.exports = {
   clientValidation,
@@ -15,4 +15,3 @@ module.exports = {
   calculateDueDate,
   calculateFine,
 };
-

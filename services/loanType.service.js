@@ -1,8 +1,8 @@
-const { Types } = require("mongoose");
+const { Types } = require('mongoose');
 
-const { LoanType, Loan } = require("../models");
-const { HttpError } = require("../utils");
-const { httpErrorMsg } = require("../constants");
+const { LoanType, Loan } = require('../models');
+const { HttpError } = require('../utils');
+const { httpErrorMsg } = require('../constants');
 
 exports.createLoanType = (loanTypeData) => LoanType.create(loanTypeData);
 
@@ -25,21 +25,21 @@ exports.deleteLoanType = async (id) => {
 
   if (existingLoans) {
     throw new HttpError(400, httpErrorMsg.CANNOT_DELETE_LOANTYPE);
-  } 
+  }
 
   await LoanType.findByIdAndDelete(id);
-}
+};
 
 exports.checkLoanTypeExistsById = async (id) => {
   const isIdValid = Types.ObjectId.isValid(id);
 
   if (!isIdValid) {
-      throw new HttpError( 404, httpErrorMsg.DATA_NOT_FOUND);
+    throw new HttpError(404, httpErrorMsg.DATA_NOT_FOUND);
   }
 
   const loanTypeExists = await LoanType.exists({ _id: id });
 
   if (!loanTypeExists) {
-    throw new HttpError(404,  httpErrorMsg.DATA_NOT_FOUND);
+    throw new HttpError(404, httpErrorMsg.DATA_NOT_FOUND);
   }
 };

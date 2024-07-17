@@ -1,6 +1,6 @@
-const { clientValidation, HttpError } = require("../utils");
+const { clientValidation, HttpError } = require('../utils');
 const { clientService } = require('../services');
-const { httpErrorMsg } = require("../constants");
+const { httpErrorMsg } = require('../constants');
 
 exports.handleCreateClientData = async (req, res, next) => {
   try {
@@ -10,11 +10,11 @@ exports.handleCreateClientData = async (req, res, next) => {
       throw new HttpError(400, httpErrorMsg.INVALID_DATA);
     }
 
-   await clientService.checkClientExistsByPhone({ phone: value.phone });
+    await clientService.checkClientExistsByPhone({ phone: value.phone });
 
     req.body = value;
     next();
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 };
@@ -26,7 +26,7 @@ exports.validateClientId = async (req, res, next) => {
     await clientService.checkClientExistsById(id);
 
     next();
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 };
@@ -40,15 +40,15 @@ exports.handleUpdateClientData = async (req, res, next) => {
     }
 
     const { phone } = value;
-    const {id } = req.params;  
+    const { id } = req.params;
 
     if (phone) {
-      await clientService.checkClientExistsByPhone({ phone, _id: { $ne: id }});
+      await clientService.checkClientExistsByPhone({ phone, _id: { $ne: id } });
     }
 
     req.body = value;
     next();
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 };

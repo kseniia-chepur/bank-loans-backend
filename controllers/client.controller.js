@@ -1,15 +1,15 @@
-const { successMsg } = require("../constants");
-const { clientService } = require("../services");
+const { successMsg } = require('../constants');
+const { clientService } = require('../services');
 
 exports.createClient = async (req, res, next) => {
   try {
     const newClient = await clientService.createClient(req.body);
-    
+
     res.status(201).json({
       status: successMsg,
       client: newClient,
     });
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 };
@@ -22,7 +22,7 @@ exports.getClients = async (req, res, next) => {
       status: successMsg,
       clients,
     });
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 };
@@ -37,7 +37,7 @@ exports.getOneClient = async (req, res, next) => {
       status: successMsg,
       client,
     });
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 };
@@ -52,7 +52,7 @@ exports.updateClient = async (req, res, next) => {
       status: successMsg,
       client: updatedClient,
     });
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 };
@@ -61,10 +61,10 @@ exports.deleteClient = async (req, res, next) => {
   const { id } = req.params;
 
   try {
-   await clientService.deleteUser(id);
+    await clientService.deleteUser(id);
 
     res.sendStatus(204);
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 };

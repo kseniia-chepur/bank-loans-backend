@@ -6,6 +6,7 @@
   "scripts": {
     "prod": "cross-env NODE_ENV=production node ./server.js",
     "dev": "cross-env NODE_ENV=development nodemon ./server.js",
+    "lint:fix": "eslint --fix --ext .js,.jsx .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -23,14 +24,14 @@
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
-    "nodemon": "^3.1.4",
     "eslint": "^8.34.0",
-    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.1.1",
     "husky": "^4.3.8",
-    "lint-staged": "^13.1.2"
+    "lint-staged": "^13.1.2",
+    "nodemon": "^3.1.4"
   },
   "lint-staged": {
     "*.js": [

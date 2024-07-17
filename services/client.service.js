@@ -1,8 +1,8 @@
-const { Types } = require("mongoose");
+const { Types } = require('mongoose');
 
-const { Client, Loan } = require("../models");
-const { HttpError } = require("../utils");
-const { httpErrorMsg } = require("../constants");
+const { Client, Loan } = require('../models');
+const { HttpError } = require('../utils');
+const { httpErrorMsg } = require('../constants');
 
 exports.createClient = (clientData) => Client.create(clientData);
 
@@ -28,7 +28,7 @@ exports.deleteUser = async (id) => {
   }
 
   await Client.findByIdAndDelete(id);
-}
+};
 
 exports.checkClientExistsByPhone = async (phone) => {
   const clientExists = await Client.exists(phone);

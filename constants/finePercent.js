@@ -1,5 +1,3 @@
-const { NOT_APPLIED } = require("./overdueDays");
-
 const finePercent = {
   NOT_APPLIED: 0,
   MIN: 0.5,
@@ -9,4 +7,3 @@ const finePercent = {
 };
 
 module.exports = finePercent;
-

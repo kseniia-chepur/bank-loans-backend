@@ -1,15 +1,15 @@
-const { successMsg } = require("../constants");
-const { loanService } = require("../services");
+const { successMsg } = require('../constants');
+const { loanService } = require('../services');
 
 exports.createLoan = async (req, res, next) => {
   try {
     const newLoan = await loanService.createLoan(req.body);
-    
+
     res.status(201).json({
       status: successMsg,
       loan: newLoan,
     });
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 };
@@ -22,12 +22,12 @@ exports.getLoans = async (req, res, next) => {
       status: successMsg,
       loans,
     });
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 };
 
-exports.getOneLoan = async (req, res) => {
+exports.getOneLoan = async (req, res, next) => {
   const { id } = req.params;
 
   try {
@@ -37,7 +37,7 @@ exports.getOneLoan = async (req, res) => {
       status: successMsg,
       loan,
     });
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 };
@@ -53,7 +53,7 @@ exports.updateLoan = async (req, res, next) => {
       status: successMsg,
       loan: updatedLoan,
     });
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 };
@@ -63,9 +63,9 @@ exports.deleteLoan = async (req, res, next) => {
 
   try {
     await loanService.deleteLoan(id);
-  
+
     res.sendStatus(204);
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 };

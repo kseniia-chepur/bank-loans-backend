@@ -22,4 +22,3 @@ exports.updateLoanTypeValidator = (data) =>
       term: Joi.number().min(6).max(60),
     })
     .validate(data);
-

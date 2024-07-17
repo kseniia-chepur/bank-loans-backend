@@ -8,14 +8,14 @@ const loanSchema = new Schema(
       required: true,
     },
     client: {
-      type: Types.ObjectId, 
+      type: Types.ObjectId,
       ref: 'Client',
       required: true,
     },
     amount: {
       type: Number,
       required: true,
-    }, 
+    },
     dateIssued: {
       type: Date,
       default: Date.now(),

@@ -1,10 +1,9 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const { HttpError } = require("../utils");
-const { httpErrorMsg } = require("../constants");
-const { User } = require("../models");
-
+const { HttpError } = require('../utils');
+const { httpErrorMsg } = require('../constants');
+const { User } = require('../models');
 
 exports.registerNewUser = async (userData) => {
   const { email, password, role } = userData;
@@ -14,10 +13,10 @@ exports.registerNewUser = async (userData) => {
     email,
     password: passwordWithHash,
     role,
-  }
+  };
 
   const newUser = await User.create(newUserData);
-  
+
   const token = jwt.sign({ id: newUser.id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES,
   });
@@ -27,7 +26,7 @@ exports.registerNewUser = async (userData) => {
   return {
     user: newUser,
     token,
-  }
+  };
 };
 
 exports.loginUser = async ({ email, password }) => {
@@ -49,10 +48,10 @@ exports.loginUser = async ({ email, password }) => {
 
   user.password = undefined;
 
-  return { 
+  return {
     user,
     token,
-  }
+  };
 };
 
 exports.checkUserExistsByEmail = async (email) => {
@@ -72,7 +71,7 @@ exports.verifyToken = (token) => {
     const { id } = jwt.verify(token, process.env.JWT_SECRET);
 
     return id;
-  } catch(err) {
+  } catch (err) {
     throw new HttpError(401, httpErrorMsg.UNAUTHORIZED);
   }
 };

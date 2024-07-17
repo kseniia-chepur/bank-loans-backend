@@ -4,4 +4,4 @@ const PASSWORD_REGEX = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-_]
 module.exports = {
   PHONE_REGEX,
   PASSWORD_REGEX,
-}
+};

@@ -1,25 +1,23 @@
-
-const { httpErrorMsg } = require("../constants");
-const { userService } = require("../services");
-const { authValidation, HttpError } = require("../utils")
+const { httpErrorMsg } = require('../constants');
+const { userService } = require('../services');
+const { authValidation, HttpError } = require('../utils');
 
 exports.handleSignupData = async (req, res, next) => {
   try {
     const { value, error } = authValidation.signupUserDataValidator(req.body);
 
-  if (error) {
-    throw new HttpError(400, httpErrorMsg.INVALID_DATA);
-  }
+    if (error) {
+      throw new HttpError(400, httpErrorMsg.INVALID_DATA);
+    }
 
-  await userService.checkUserExistsByEmail({ email: value.email });
+    await userService.checkUserExistsByEmail({ email: value.email });
 
-  req.body = value;
-  next();
-  } catch(err) {
+    req.body = value;
+    next();
+  } catch (err) {
     next(err);
   }
 };
-
 
 exports.handleLoginData = (req, res, next) => {
   const { value, error } = authValidation.loginUserDataValidator(req.body);
@@ -29,7 +27,7 @@ exports.handleLoginData = (req, res, next) => {
   }
 
   req.body = value;
-  next(); 
+  next();
 };
 
 exports.protectRoutes = async (req, res, next) => {
@@ -40,22 +38,22 @@ exports.protectRoutes = async (req, res, next) => {
     if (!userId) {
       throw new HttpError(401, httpErrorMsg.UNAUTHORIZED);
     }
-  
+
     const currentUser = await userService.getOneUser(userId);
-  
+
     if (!currentUser) {
       throw new HttpError(401, httpErrorMsg.UNAUTHORIZED);
     }
-  
+
     req.user = currentUser;
     next();
-  } catch(err) {
+  } catch (err) {
     next(err);
   }
 };
 
 exports.allowFor = (...roles) => (req, res, next) => {
   if (roles.includes(req.user.role)) return next();
-  
+
   next(new HttpError(403, httpErrorMsg.FORBIDDEN));
-}
+};
