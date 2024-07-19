@@ -809,13 +809,13 @@
                 "format": "date",
                 "description": "the last update time",
                 "example": "2024-07-14T08:58:32.012Z"
-              } 
+              },
+              "token": {
+              "type": "string",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OTM5MzM3MDU1Yzg3YzgzYTkyM2FlYSIsImlhdCI6MTcyMTIxNTM0OCwiZXhwIjoxNzIxMzAxNzQ4fQ.0ztNTw_-pRKfnX69eDM_QhmgN7B59mll0kHd_gdYjes"
+              }
             }
-          },
-          "token": {
-            "type": "string",
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OTM5MzM3MDU1Yzg3YzgzYTkyM2FlYSIsImlhdCI6MTcyMTIxNTM0OCwiZXhwIjoxNzIxMzAxNzQ4fQ.0ztNTw_-pRKfnX69eDM_QhmgN7B59mll0kHd_gdYjes"
-          } 
+          }          
         }
       },
       "LoginRequest": {
@@ -874,13 +874,13 @@
                 "format": "date",
                 "description": "the last update time",
                 "example": "2024-07-14T08:58:32.012Z"
-              }
+              },
+              "token": {
+              "type": "string",
+              "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OTM5MzM3MDU1Yzg3YzgzYTkyM2FlYSIsImlhdCI6MTcyMTIxNTM0OCwiZXhwIjoxNzIxMzAxNzQ4fQ.0ztNTw_-pRKfnX69eDM_QhmgN7B59mll0kHd_gdYjes"
+              } 
             } 
-          },
-          "token": {
-            "type": "string",
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OTM5MzM3MDU1Yzg3YzgzYTkyM2FlYSIsImlhdCI6MTcyMTIxNTM0OCwiZXhwIjoxNzIxMzAxNzQ4fQ.0ztNTw_-pRKfnX69eDM_QhmgN7B59mll0kHd_gdYjes"
-          }
+          }         
         }
       },
       "CabinetResponse": {

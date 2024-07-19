@@ -4,7 +4,6 @@ const { loanTypes } = require('../../constants');
 
 exports.createLoanTypeValidator = (data) =>
   Joi.object()
-    .options({ abortEarly: false })
     .keys({
       name: Joi.string().valid(...Object.values(loanTypes)).required(),
       conditions: Joi.string().min(5).max(40).required(),
@@ -15,7 +14,6 @@ exports.createLoanTypeValidator = (data) =>
 
 exports.updateLoanTypeValidator = (data) =>
   Joi.object()
-    .options({ abortEarly: false })
     .keys({
       conditions: Joi.string().min(5).max(40),
       rate: Joi.number().min(1).max(40),

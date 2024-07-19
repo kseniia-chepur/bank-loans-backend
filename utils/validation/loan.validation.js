@@ -2,7 +2,6 @@ const Joi = require('joi');
 
 exports.createLoanDataValidator = (data) =>
   Joi.object()
-    .options({ abortEarly: false })
     .keys({
       loanType: Joi.string().length(24).required(),
       client: Joi.string().length(24).required(),

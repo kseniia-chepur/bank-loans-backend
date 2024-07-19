@@ -33,7 +33,7 @@ exports.handleLoginData = (req, res, next) => {
 exports.protectRoutes = async (req, res, next) => {
   try {
     const token = req.headers.authorization?.startsWith('Bearer ') && req.headers.authorization.split(' ')[1];
-    const userId = userService.verifyToken(token);
+    const userId = await userService.verifyToken(token);
 
     if (!userId) {
       throw new HttpError(401, httpErrorMsg.UNAUTHORIZED);

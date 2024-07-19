@@ -1,9 +1,12 @@
-const { httpErrorMsg } = require('../constants');
-
 exports.globalErrorHandler = (err, req, res, next) => {
+  if (process.env.NODE_ENV === 'production') {
+    return res.status(err.status ?? 500).json({
+      message: err.message,
+    });
+  }
+
   res.status(err.status ?? 500).json({
-    message: !err.status || err.status === 500 ? httpErrorMsg.INTERNAL_SERVER_ERROR : err.message,
-    data: err.data,
+    message: err.message,
     stack: err.stack,
   });
 };
