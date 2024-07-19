@@ -21,10 +21,12 @@ exports.registerNewUser = async (userData) => {
     expiresIn: process.env.JWT_EXPIRES,
   });
 
-  newUser.token = token;
   newUser.password = undefined;
 
-  return newUser;
+  return {
+    user: newUser,
+    token,
+  };
 };
 
 exports.loginUser = async ({ email, password }) => {
@@ -44,10 +46,12 @@ exports.loginUser = async ({ email, password }) => {
     expiresIn: process.env.JWT_EXPIRES,
   });
 
-  user.token = token;
   user.password = undefined;
 
-  return user;
+  return {
+    user,
+    token,
+  };
 };
 
 exports.checkUserExistsByEmail = async (email) => {

@@ -3,11 +3,12 @@ const { userService } = require('../services');
 
 exports.signup = async (req, res, next) => {
   try {
-    const user = await userService.registerNewUser(req.body);
+    const { user, token } = await userService.registerNewUser(req.body);
 
     res.status(201).json({
       status: successMsg,
       user,
+      token,
     });
   } catch (err) {
     next(err);
@@ -16,11 +17,12 @@ exports.signup = async (req, res, next) => {
 
 exports.login = async (req, res, next) => {
   try {
-    const user = await userService.loginUser(req.body);
+    const { user, token } = await userService.loginUser(req.body);
 
     res.status(200).json({
       status: successMsg,
       user,
+      token,
     });
   } catch (err) {
     next(err);
