@@ -749,17 +749,22 @@
     "schemas": {
       "SignupRequest": {
         "type": "object",
-        "required": ["email", "password"],
+        "required": ["email", "username", "password"],
         "properties": {
           "email": {
             "type": "string",
-            "description": "User's email",
+            "description": "user's email",
             "format": "email",
             "example": "user@gmail.com"
           },
+          "username": {
+            "type": "string",
+            "description": "special name given to a user to uniquely identify",
+            "example": "Alex#12"
+          },
           "password": {
             "type": "string",
-            "description": "User's password",
+            "description": "user's password",
             "example": "User#1234"
           },
           "role": {
@@ -786,6 +791,11 @@
                 "format": "email",
                 "description": "User's email address",
                 "example": "user@gmail.com"
+              },
+              "username": {
+                "type": "string",
+                "description": "special name given to a user to uniquely identify",
+                "example": "Alex#12"
               },
               "role": {
                 "type": "string",
@@ -820,13 +830,12 @@
       },
       "LoginRequest": {
         "type": "object",
-        "required": ["email", "password"],
+        "required": ["username", "password"],
         "properties": {
-          "email": {
+          "username": {
             "type": "string",
-            "description": "User email address",
-            "format": "email",
-            "example": "user@gmail.com"
+            "description": "special name given to a user to uniquely identify",
+            "example": "Alex#12"
           },
           "password": {
             "type": "string",
@@ -856,6 +865,11 @@
                 "format": "email",
                 "description": "User email address",
                 "example": "user@gmail.com"
+              },
+              "username": {
+                "type": "string",
+                "description": "special name given to a user to uniquely identify",
+                "example": "Alex#12"
               },
               "role": {
                 "type": "string",
@@ -904,6 +918,11 @@
                 "format": "email",
                 "description": "User email address",
                 "example": "user@gmail.com"
+              },
+              "username": {
+                "type": "string",
+                "description": "special name given to a user to uniquely identify",
+                "example": "Alex#12"
               },
               "role": {
                 "type": "string",

@@ -6,11 +6,12 @@ const { httpErrorMsg } = require('../constants');
 const { User } = require('../models');
 
 exports.registerNewUser = async (userData) => {
-  const { email, password, role } = userData;
+  const { email, username, password, role } = userData;
   const passwordWithHash = await bcrypt.hash(password, 10);
 
   const newUserData = {
     email,
+    username,
     password: passwordWithHash,
     role,
   };
@@ -29,8 +30,8 @@ exports.registerNewUser = async (userData) => {
   };
 };
 
-exports.loginUser = async ({ email, password }) => {
-  const user = await User.findOne({ email });
+exports.loginUser = async ({ username, password }) => {
+  const user = await User.findOne({ username });
 
   if (!user) {
     throw new HttpError(404, httpErrorMsg.USER_NOT_FOUND);
@@ -54,8 +55,8 @@ exports.loginUser = async ({ email, password }) => {
   };
 };
 
-exports.checkUserExistsByEmail = async (email) => {
-  const userExists = await User.exists(email);
+exports.checkUserExists = async (searchBy) => {
+  const userExists = await User.exists(searchBy);
 
   if (userExists) {
     throw new HttpError(409, httpErrorMsg.USER_EXISTS);

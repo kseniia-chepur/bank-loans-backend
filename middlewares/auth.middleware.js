@@ -10,7 +10,9 @@ exports.handleSignupData = async (req, res, next) => {
       throw new HttpError(400, httpErrorMsg.INVALID_DATA);
     }
 
-    await userService.checkUserExistsByEmail({ email: value.email });
+    await userService.checkUserExists({ email: value.email });
+
+    await userService.checkUserExists({ username: value.username });
 
     req.body = value;
     next();
