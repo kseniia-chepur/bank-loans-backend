@@ -7,7 +7,7 @@ exports.signupUserDataValidator = (data) =>
     .options({ abortEarly: false })
     .keys({
       email: Joi.string().email().required(),
-      username: Joi.string().min(2).max(20).required(),
+      username: Joi.string().min(3).max(20).required(),
       password: Joi.string().regex(regex.PASSWORD_REGEX).required(),
       role: Joi.string().valid(...Object.values(userRoles)),
     })
@@ -17,7 +17,7 @@ exports.loginUserDataValidator = (data) =>
   Joi.object()
     .options({ abortEarly: false })
     .keys({
-      username: Joi.string().min(2).max(20).required(),
+      username: Joi.string().min(3).max(20).required(),
       password: Joi.string().regex(regex.PASSWORD_REGEX).required(),
     })
     .validate(data);

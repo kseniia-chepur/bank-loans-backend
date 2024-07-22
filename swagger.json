@@ -755,7 +755,7 @@
             "type": "string",
             "description": "user's email",
             "format": "email",
-            "example": "user@gmail.com"
+            "example": "alex@gmail.com"
           },
           "username": {
             "type": "string",
@@ -765,7 +765,7 @@
           "password": {
             "type": "string",
             "description": "user's password",
-            "example": "User#1234"
+            "example": "Alex#1234"
           },
           "role": {
             "type": "string",
@@ -790,7 +790,7 @@
                 "type": "string",
                 "format": "email",
                 "description": "User's email address",
-                "example": "user@gmail.com"
+                "example": "alex@gmail.com"
               },
               "username": {
                 "type": "string",
@@ -835,12 +835,12 @@
           "username": {
             "type": "string",
             "description": "special name given to a user to uniquely identify",
-            "example": "Alex#12"
+            "example": "Admin#12"
           },
           "password": {
             "type": "string",
             "description": "User's password",
-            "example": "User#1234"
+            "example": "Admin#1234"
           } 
         }
       },
@@ -858,24 +858,24 @@
               "_id": {
                 "type": "string",
                 "description": "User _id",
-                "example": "66939337055c87c83a923aea"
+                "example": "669d209534798d0f57f642aa"
               },
               "email": {
                 "type": "string",
                 "format": "email",
                 "description": "User email address",
-                "example": "user@gmail.com"
+                "example": "admin@gmail.com"
               },
               "username": {
                 "type": "string",
                 "description": "special name given to a user to uniquely identify",
-                "example": "Alex#12"
+                "example": "Admin#12"
               },
               "role": {
                 "type": "string",
                 "enum" : [ "specialist", "admin" ],
                 "description": "admin has full rigths, specialist is not allowed to make HTTP request to delete endpoints",
-                "example": "specialist" 
+                "example": "admin" 
               },
               "createdAt": {
                 "type": "string",
@@ -911,24 +911,24 @@
               "_id": {
                 "type": "string",
                 "description": "User _id",
-                "example": "66939337055c87c83a923aea"
+                "example": "669d209534798d0f57f642aa"
               },
               "email": {
                 "type": "string",
                 "format": "email",
                 "description": "User email address",
-                "example": "user@gmail.com"
+                "example": "admin@gmail.com"
               },
               "username": {
                 "type": "string",
                 "description": "special name given to a user to uniquely identify",
-                "example": "Alex#12"
+                "example": "Admin#12"
               },
               "role": {
                 "type": "string",
                 "enum" : [ "specialist", "admin" ],
                 "description": "admin has full rigths, specialist is not allowed to make HTTP request to delete endpoints",
-                "example": "specialist" 
+                "example": "admin" 
               },
               "createdAt": {
                 "type": "string",
